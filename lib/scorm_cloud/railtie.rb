@@ -6,7 +6,9 @@ class ScormCloud::Railtie < Rails::Railtie
 	config.scorm_cloud = ActiveSupport::OrderedOptions.new
 
 	initializer "scorm_cloud.scorm_rails_helpers" do
-		ActionController::Base.send :include, ScormCloud::ScormRailsHelpers
+    ActiveSupport.on_load(:action_controller) do
+      ActionController::Base.send :include, ScormCloud::ScormRailsHelpers
+    end
 	end
 
 end
